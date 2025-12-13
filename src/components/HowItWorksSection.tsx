@@ -24,25 +24,28 @@ const HowItWorksSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="how-it-works" className="section-padding" ref={ref}>
+    <section id="how-it-works" className="section-padding border-t border-border" ref={ref}>
       <div className="container-tight">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="max-w-2xl mb-20"
+          className="max-w-2xl mb-16"
         >
-          <span className="text-xs tracking-widest uppercase text-muted-foreground mb-4 block">
-            How it works
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif italic leading-tight">
-            Three simple steps to automation
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-primary" />
+            <span className="text-xs font-mono tracking-widest text-primary">HOW IT WORKS</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
+            Three simple steps to
+            <br />
+            <span className="text-primary">automation</span>
           </h2>
         </motion.div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -53,21 +56,22 @@ const HowItWorksSection = () => {
             >
               {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-px bg-border" />
+                <div className="hidden md:block absolute top-6 left-[calc(50%+3rem)] w-[calc(100%-6rem)] h-px bg-border" />
               )}
               
-              <div className="relative">
-                <span className="text-7xl md:text-8xl font-serif italic text-muted-foreground/20 leading-none">
-                  {step.number}
-                </span>
-                <div className="mt-6">
-                  <h3 className="text-xl font-medium mb-3 tracking-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-                    {step.description}
-                  </p>
+              <div className="relative p-6 border border-border bg-card hover:border-primary/30 transition-colors">
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-4xl font-bold font-mono text-primary/30">
+                    {step.number}
+                  </span>
+                  <div className="flex-1 h-px bg-border" />
                 </div>
+                <h3 className="text-lg font-medium mb-3 tracking-tight">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {step.description}
+                </p>
               </div>
             </motion.div>
           ))}

@@ -24,7 +24,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-card" ref={ref}>
+    <section id="contact" className="section-padding border-t border-border" ref={ref}>
       <div className="container-tight">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Side */}
@@ -33,29 +33,32 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-xs tracking-widest uppercase text-muted-foreground mb-4 block">
-              Contact
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif italic leading-tight mb-6">
-              Get in touch
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-primary" />
+              <span className="text-xs font-mono tracking-widest text-primary">CONTACT</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold leading-tight mb-6">
+              Get in
+              <br />
+              <span className="text-primary">touch</span>
             </h2>
             <p className="text-muted-foreground mb-10 max-w-md">
               Have questions about our workflows or need custom automation solutions? We're here to help.
             </p>
 
             <div className="space-y-6">
-              <div>
-                <div className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                  Email
+              <div className="p-4 border border-border bg-card">
+                <div className="text-[10px] font-mono tracking-widest text-muted-foreground mb-2">
+                  EMAIL
                 </div>
-                <a href="mailto:hello@zaperra.com" className="font-medium hover:underline">
+                <a href="mailto:hello@zaperra.com" className="font-medium hover:text-primary transition-colors">
                   hello@zaperra.com
                 </a>
               </div>
 
-              <div>
-                <div className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                  Response Time
+              <div className="p-4 border border-border bg-card">
+                <div className="text-[10px] font-mono tracking-widest text-muted-foreground mb-2">
+                  RESPONSE TIME
                 </div>
                 <span className="font-medium">Within 24 hours</span>
               </div>
@@ -70,8 +73,8 @@ const ContactSection = () => {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
-                  Name
+                <label htmlFor="name" className="block text-[10px] font-mono tracking-widest text-muted-foreground mb-3">
+                  NAME
                 </label>
                 <Input
                   id="name"
@@ -79,13 +82,13 @@ const ContactSection = () => {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Your name"
                   required
-                  className="bg-background border-border rounded-md"
+                  className="bg-card border-border rounded-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
-                  Email
+                <label htmlFor="email" className="block text-[10px] font-mono tracking-widest text-muted-foreground mb-3">
+                  EMAIL
                 </label>
                 <Input
                   id="email"
@@ -94,13 +97,13 @@ const ContactSection = () => {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="you@example.com"
                   required
-                  className="bg-background border-border rounded-md"
+                  className="bg-card border-border rounded-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-xs tracking-widest uppercase text-muted-foreground mb-3">
-                  Message
+                <label htmlFor="message" className="block text-[10px] font-mono tracking-widest text-muted-foreground mb-3">
+                  MESSAGE
                 </label>
                 <Textarea
                   id="message"
@@ -109,7 +112,7 @@ const ContactSection = () => {
                   placeholder="Tell us how we can help..."
                   rows={5}
                   required
-                  className="bg-background border-border rounded-md resize-none"
+                  className="bg-card border-border rounded-none resize-none"
                 />
               </div>
 
