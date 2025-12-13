@@ -33,11 +33,11 @@ const WorkflowCard = ({ workflow }: { workflow: typeof MOCK_WORKFLOWS[0] }) => {
   };
 
   return (
-    <div className="group glass-card rounded-2xl p-6 hover-lift">
+    <div className="group border border-border rounded-lg p-6 hover:border-foreground/30 transition-all">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-          <Zap className="w-6 h-6 text-accent" />
+        <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:bg-foreground group-hover:text-background transition-all">
+          <Zap className="w-4 h-4" />
         </div>
         <div className="flex items-center gap-2">
           <Badge className={complexityColors[workflow.complexity]}>
@@ -50,7 +50,7 @@ const WorkflowCard = ({ workflow }: { workflow: typeof MOCK_WORKFLOWS[0] }) => {
       </div>
 
       {/* Content */}
-      <h3 className="font-display font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
+      <h3 className="font-medium text-base mb-2">
         {workflow.name}
       </h3>
       <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
@@ -85,7 +85,7 @@ const WorkflowCard = ({ workflow }: { workflow: typeof MOCK_WORKFLOWS[0] }) => {
 
       {/* Hover Action */}
       <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-        <Button variant="hero" className="w-full">
+        <Button variant="minimal" className="w-full">
           Download Workflow
         </Button>
       </div>

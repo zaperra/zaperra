@@ -43,15 +43,12 @@ const Auth = () => {
           </Link>
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-xl">Z</span>
-            </div>
-            <span className="font-display font-bold text-2xl">Zaperra</span>
+          <Link to="/" className="inline-block mb-8">
+            <span className="font-serif text-2xl italic">Zaperra</span>
           </Link>
 
           {/* Header */}
-          <h1 className="font-display text-2xl sm:text-3xl font-bold mb-2">
+          <h1 className="font-serif italic text-2xl sm:text-3xl mb-2">
             {isSignup ? 'Create your account' : 'Welcome back'}
           </h1>
           <p className="text-muted-foreground mb-8">
@@ -119,7 +116,7 @@ const Auth = () => {
               </div>
             </div>
 
-            <Button type="submit" variant="hero" className="w-full" disabled={isLoading}>
+            <Button type="submit" variant="minimal" className="w-full" disabled={isLoading}>
               {isLoading ? 'Loading...' : isSignup ? 'Create Account' : 'Sign In'}
             </Button>
           </form>

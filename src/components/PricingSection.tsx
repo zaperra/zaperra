@@ -1,118 +1,137 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PRICING_TIERS } from "@/lib/data";
-import { Check, Sparkles } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const PricingSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section id="pricing" className="py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="section-padding bg-card" ref={ref}>
+      <div className="container-tight">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-accent text-sm font-medium uppercase tracking-wider">Pricing</span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold mt-4 mb-4">
-            Simple Credit-Based Pricing
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="max-w-2xl mb-20"
+        >
+          <span className="text-xs tracking-widest uppercase text-muted-foreground mb-4 block">
+            Pricing
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif italic leading-tight mb-4">
+            Simple, transparent pricing
           </h2>
           <p className="text-muted-foreground">
-            Buy credits once, use them forever. No subscriptions, no hidden fees.
+            Buy credits once, use them forever. No subscriptions.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Free Tier Banner */}
-        <div className="max-w-2xl mx-auto mb-12">
-          <div className="glass-card rounded-2xl p-6 border-accent/30 border-2">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-purple-600 flex items-center justify-center shrink-0">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Start Free</h3>
-                <p className="text-sm text-muted-foreground">
-                  Sign up and get <span className="text-accent font-medium">2 free downloads</span> of low-complexity workflows. No credit card required.
-                </p>
-              </div>
+        {/* Free Tier */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12 p-6 border border-border rounded-lg"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="font-medium mb-1">Start Free</h3>
+              <p className="text-sm text-muted-foreground">
+                Sign up and get 2 free downloads of low-complexity workflows.
+              </p>
             </div>
+            <Link to="/auth?signup=true">
+              <Button variant="minimal-outline" size="sm">
+                Create Account
+              </Button>
+            </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {PRICING_TIERS.map((tier, index) => (
-            <div
+            <motion.div
               key={tier.id}
-              className={`relative rounded-2xl p-6 hover-lift ${
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+              className={`relative p-6 rounded-lg transition-all duration-300 hover:-translate-y-1 ${
                 tier.popular
-                  ? 'bg-primary text-primary-foreground'
-                  : 'glass-card'
+                  ? "bg-foreground text-background"
+                  : "border border-border hover:border-foreground/30"
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="px-3 py-1 rounded-full bg-accent text-white text-xs font-medium">
-                    Most Popular
-                  </span>
-                </div>
+                <span className="absolute -top-3 left-4 px-3 py-1 bg-background text-foreground text-xs rounded-full">
+                  Popular
+                </span>
               )}
 
               <div className="mb-6">
-                <h3 className="font-display font-semibold text-lg mb-2">{tier.name}</h3>
-                <p className={`text-sm ${tier.popular ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                <h3 className="font-medium mb-1">{tier.name}</h3>
+                <p className={`text-xs ${tier.popular ? "text-background/60" : "text-muted-foreground"}`}>
                   {tier.description}
                 </p>
               </div>
 
               <div className="mb-6">
-                <span className="font-display text-4xl font-bold">${tier.price}</span>
-                <span className={`text-sm ${tier.popular ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
-                  {' '}one-time
+                <span className="text-4xl font-serif italic">${tier.price}</span>
+                <span className={`text-sm ${tier.popular ? "text-background/60" : "text-muted-foreground"}`}>
+                  {" "}one-time
                 </span>
               </div>
 
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-2">
-                  <Check className={`w-4 h-4 ${tier.popular ? 'text-accent' : 'text-accent'}`} />
+                  <Check className={`w-4 h-4 ${tier.popular ? "text-background/60" : "text-muted-foreground"}`} />
                   <span className="text-sm">{tier.credits} credits</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className={`w-4 h-4 ${tier.popular ? 'text-accent' : 'text-accent'}`} />
+                  <Check className={`w-4 h-4 ${tier.popular ? "text-background/60" : "text-muted-foreground"}`} />
                   <span className="text-sm">Never expires</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className={`w-4 h-4 ${tier.popular ? 'text-accent' : 'text-accent'}`} />
-                  <span className="text-sm">Instant download</span>
                 </div>
               </div>
 
-              <Link to="/auth?signup=true">
+              <Link to="/auth?signup=true" className="block">
                 <Button
-                  variant={tier.popular ? 'hero-secondary' : 'hero'}
-                  className="w-full"
+                  variant={tier.popular ? "secondary" : "minimal-outline"}
+                  className={`w-full ${tier.popular ? "text-foreground" : ""}`}
+                  size="sm"
                 >
                   Get Started
+                  <ArrowRight className="w-3 h-3" />
                 </Button>
               </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Credit Usage Info */}
-        <div className="max-w-2xl mx-auto mt-16 text-center">
-          <h3 className="font-display font-semibold mb-4">How Credits Work</h3>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="glass-card rounded-xl p-4">
-              <div className="text-2xl font-bold text-accent mb-1">1</div>
-              <div className="text-sm text-muted-foreground">credit for Low complexity</div>
-            </div>
-            <div className="glass-card rounded-xl p-4">
-              <div className="text-2xl font-bold text-purple-500 mb-1">3</div>
-              <div className="text-sm text-muted-foreground">credits for Medium complexity</div>
-            </div>
-            <div className="glass-card rounded-xl p-4">
-              <div className="text-2xl font-bold text-pink-500 mb-1">5</div>
-              <div className="text-sm text-muted-foreground">credits for High complexity</div>
-            </div>
+        {/* Credit Info */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mt-16 pt-16 border-t border-border"
+        >
+          <h3 className="font-medium mb-8 text-center">Credit Usage</h3>
+          <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+            {[
+              { credits: 1, label: "Low complexity" },
+              { credits: 3, label: "Medium complexity" },
+              { credits: 5, label: "High complexity" },
+            ].map((item, index) => (
+              <div key={index} className="text-center p-4 border border-border rounded-lg">
+                <span className="text-2xl font-serif italic block mb-1">{item.credits}</span>
+                <span className="text-xs text-muted-foreground">{item.label}</span>
+              </div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
