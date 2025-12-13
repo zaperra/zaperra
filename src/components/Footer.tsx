@@ -2,38 +2,37 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="border-t border-border py-16">
+      <div className="container-tight">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-purple-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Z</span>
-              </div>
-              <span className="font-display font-bold text-xl">Zaperra</span>
+          <div className="md:col-span-2">
+            <Link to="/" className="inline-block mb-4">
+              <span className="font-serif text-2xl italic">Zaperra</span>
             </Link>
-            <p className="text-muted-foreground text-sm max-w-sm">
-              The premier marketplace for n8n automation workflows. Buy, download, and automate your business in minutes.
+            <p className="text-muted-foreground text-sm max-w-xs leading-relaxed">
+              The premier marketplace for n8n automation workflows. Buy, download, and automate in minutes.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold text-sm mb-4">Product</h4>
-            <ul className="space-y-3">
+            <h4 className="text-xs tracking-widest uppercase text-muted-foreground mb-6">
+              Product
+            </h4>
+            <ul className="space-y-4">
               <li>
-                <Link to="/marketplace" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <Link to="/marketplace" className="text-sm hover:underline">
                   Marketplace
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <Link to="/pricing" className="text-sm hover:underline">
                   Pricing
                 </Link>
               </li>
               <li>
-                <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a href="#features" className="text-sm hover:underline">
                   Features
                 </a>
               </li>
@@ -41,28 +40,30 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold text-sm mb-4">Support</h4>
-            <ul className="space-y-3">
+            <h4 className="text-xs tracking-widest uppercase text-muted-foreground mb-6">
+              Support
+            </h4>
+            <ul className="space-y-4">
               <li>
-                <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a href="#contact" className="text-sm hover:underline">
                   Contact
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a href="#" className="text-sm hover:underline">
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-                  Privacy Policy
+                <a href="#" className="text-sm hover:underline">
+                  Privacy
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="border-t border-border mt-16 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Zaperra. All rights reserved.
           </p>

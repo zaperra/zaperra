@@ -93,7 +93,7 @@ const Pricing = () => {
 
                 <Link to="/auth?signup=true">
                   <Button
-                    variant={tier.popular ? 'hero-secondary' : 'hero'}
+                    variant={tier.popular ? 'secondary' : 'minimal'}
                     className="w-full"
                   >
                     Get Started

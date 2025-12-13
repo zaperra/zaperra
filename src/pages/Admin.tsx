@@ -55,10 +55,10 @@ const AdminSidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           {/* Header */}
           <div className="p-6 border-b border-border flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-purple-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Z</span>
+              <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
+                <span className="text-background font-serif italic text-lg">Z</span>
               </div>
-              <span className="font-display font-bold text-lg">Admin</span>
+              <span className="font-serif italic text-lg">Admin</span>
             </Link>
             <button className="lg:hidden" onClick={onClose}>
               <X className="w-5 h-5" />
@@ -113,7 +113,7 @@ const StatCard = ({
   isPositive: boolean;
   icon: React.ElementType;
 }) => (
-  <div className="glass-card rounded-2xl p-6">
+  <div className="border border-border rounded-lg p-6">
     <div className="flex items-center justify-between mb-4">
       <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
         <Icon className="w-5 h-5 text-accent" />
@@ -123,8 +123,8 @@ const StatCard = ({
         {change}
       </div>
     </div>
-    <div className="text-2xl font-bold font-display mb-1">{value}</div>
-    <div className="text-sm text-muted-foreground">{title}</div>
+    <div className="text-2xl font-serif italic mb-1">{value}</div>
+    <div className="text-xs text-muted-foreground tracking-wide uppercase">{title}</div>
   </div>
 );
 
@@ -152,13 +152,13 @@ const Admin = () => {
 
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Top Bar */}
-        <header className="sticky top-0 z-30 glass-card border-b border-border px-6 py-4">
+        <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm border-b border-border px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button className="lg:hidden" onClick={() => setSidebarOpen(true)}>
                 <Menu className="w-6 h-6" />
               </button>
-              <h1 className="font-display text-xl font-bold">Dashboard</h1>
+              <h1 className="font-serif italic text-xl">Dashboard</h1>
             </div>
 
             <div className="flex items-center gap-4">
@@ -166,7 +166,7 @@ const Admin = () => {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input placeholder="Search..." className="pl-9 w-64" />
               </div>
-              <Button variant="hero" size="sm">
+              <Button variant="minimal" size="sm">
                 <Plus className="w-4 h-4 mr-2" />
                 Add Workflow
               </Button>
@@ -210,16 +210,16 @@ const Admin = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Recent Users */}
-            <div className="glass-card rounded-2xl p-6">
+            <div className="border border-border rounded-lg p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-display font-semibold text-lg">Recent Users</h2>
+                <h2 className="font-medium">Recent Users</h2>
                 <Button variant="ghost" size="sm">View all</Button>
               </div>
               <div className="space-y-4">
                 {recentUsers.map((user) => (
                   <div key={user.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent/20 to-purple-500/20 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center">
                         <span className="text-sm font-medium">{user.name.charAt(0)}</span>
                       </div>
                       <div>
@@ -237,9 +237,9 @@ const Admin = () => {
             </div>
 
             {/* Recent Transactions */}
-            <div className="glass-card rounded-2xl p-6">
+            <div className="border border-border rounded-lg p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-display font-semibold text-lg">Recent Transactions</h2>
+                <h2 className="font-medium">Recent Transactions</h2>
                 <Button variant="ghost" size="sm">View all</Button>
               </div>
               <div className="space-y-4">
