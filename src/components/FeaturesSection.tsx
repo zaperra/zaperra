@@ -40,25 +40,28 @@ const FeaturesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="features" className="section-padding bg-card" ref={ref}>
+    <section id="features" className="section-padding border-t border-border" ref={ref}>
       <div className="container-tight">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="max-w-2xl mb-20"
+          className="max-w-2xl mb-16"
         >
-          <span className="text-xs tracking-widest uppercase text-muted-foreground mb-4 block">
-            Features
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif italic leading-tight">
-            Everything you need to automate your workflow
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-primary" />
+            <span className="text-xs font-mono tracking-widest text-primary">FEATURES</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
+            Everything you need to
+            <br />
+            <span className="text-primary">automate your workflow</span>
           </h2>
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -67,12 +70,12 @@ const FeaturesSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group"
+                className="bg-background p-8 group hover:bg-card transition-colors"
               >
-                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center mb-5 group-hover:bg-foreground group-hover:text-background transition-all duration-300">
-                  <Icon className="w-4 h-4" />
+                <div className="w-10 h-10 rounded border border-border flex items-center justify-center mb-5 group-hover:border-primary/40 group-hover:bg-primary/5 transition-all">
+                  <Icon className="w-4 h-4 text-primary" />
                 </div>
-                <h3 className="text-lg font-medium mb-2 tracking-tight">
+                <h3 className="text-base font-medium mb-2 tracking-tight">
                   {feature.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
