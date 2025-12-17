@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "@/components/Logo";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,15 +18,7 @@ const Navbar = () => {
       <div className="px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded border border-primary/40 bg-primary/10 flex items-center justify-center">
-              <span className="text-primary font-bold text-sm">Z</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-sm tracking-wide">ZAPERRA</span>
-              <span className="text-[9px] font-mono text-primary tracking-widest">WORKFLOWS</span>
-            </div>
-          </Link>
+          <Logo size="md" />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logo from "@/components/Logo";
 
 const Footer = () => {
   return (
@@ -7,15 +8,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded border border-primary/40 bg-primary/10 flex items-center justify-center">
-                <span className="text-primary font-bold text-sm">Z</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-sm tracking-wide">ZAPERRA</span>
-                <span className="text-[9px] font-mono text-primary tracking-widest">WORKFLOWS</span>
-              </div>
-            </Link>
+            <div className="mb-4">
+              <Logo size="md" />
+            </div>
             <p className="text-muted-foreground text-sm max-w-xs leading-relaxed">
               The premier marketplace for n8n automation workflows. Buy, download, and automate in minutes.
             </p>

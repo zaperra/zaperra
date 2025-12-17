@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Mail, Lock, User } from "lucide-react";
+import { ArrowLeft, Mail, Lock, User, Zap, Layers, Cpu } from "lucide-react";
 import { toast } from "sonner";
+import Logo from "@/components/Logo";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -36,19 +37,17 @@ const Auth = () => {
       {/* Left Side - Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          {/* Back Link */}
-          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
-            <ArrowLeft className="w-4 h-4" />
-            Back to home
-          </Link>
-
-          {/* Logo */}
-          <Link to="/" className="inline-block mb-8">
-            <span className="font-serif text-2xl italic">Zaperra</span>
-          </Link>
+          {/* Header with Back Link and Logo */}
+          <div className="flex items-center justify-between mb-12">
+            <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              Back
+            </Link>
+            <Logo size="sm" />
+          </div>
 
           {/* Header */}
-          <h1 className="font-serif italic text-2xl sm:text-3xl mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">
             {isSignup ? 'Create your account' : 'Welcome back'}
           </h1>
           <p className="text-muted-foreground mb-8">
@@ -62,17 +61,17 @@ const Auth = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {isSignup && (
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Full Name
+                <label htmlFor="name" className="block text-xs font-mono tracking-widest text-muted-foreground mb-2">
+                  FULL NAME
                 </label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="John Doe"
-                    className="pl-10"
+                    className="pl-10 bg-card border-border rounded-lg"
                     required
                   />
                 </div>
@@ -80,36 +79,36 @@ const Auth = () => {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
+              <label htmlFor="email" className="block text-xs font-mono tracking-widest text-muted-foreground mb-2">
+                EMAIL
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="you@example.com"
-                  className="pl-10"
+                  className="pl-10 bg-card border-border rounded-lg"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
-                Password
+              <label htmlFor="password" className="block text-xs font-mono tracking-widest text-muted-foreground mb-2">
+                PASSWORD
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="password"
                   type="password"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   placeholder="••••••••"
-                  className="pl-10"
+                  className="pl-10 bg-card border-border rounded-lg"
                   required
                   minLength={8}
                 />
@@ -126,7 +125,7 @@ const Auth = () => {
             {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
             <button
               onClick={() => setIsSignup(!isSignup)}
-              className="text-accent hover:underline font-medium"
+              className="text-primary hover:underline font-medium"
             >
               {isSignup ? 'Sign in' : 'Sign up'}
             </button>
@@ -135,37 +134,62 @@ const Auth = () => {
       </div>
 
       {/* Right Side - Visual */}
-      <div className="hidden lg:flex flex-1 items-center justify-center bg-muted/30 relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse-slow" />
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow animation-delay-200" />
-        </div>
-
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-card border-l border-border relative overflow-hidden">
         {/* Content */}
-        <div className="relative text-center px-8">
-          <div className="glass-card rounded-2xl p-8 max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-purple-600 flex items-center justify-center mx-auto mb-6">
-              <span className="text-white font-bold text-3xl">Z</span>
+        <div className="relative px-12 max-w-lg">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-primary" />
+              <span className="text-xs font-mono tracking-widest text-primary">WHY ZAPERRA</span>
             </div>
-            <h2 className="font-display text-2xl font-bold mb-4">
-              2000+ Automation Workflows
+            <h2 className="text-2xl font-bold mb-4">
+              2000+ Premium
+              <br />
+              <span className="text-primary">Automation Workflows</span>
             </h2>
-            <p className="text-muted-foreground mb-6">
-              Access premium n8n workflows and automate your business in minutes.
+            <p className="text-muted-foreground text-sm">
+              Access production-ready n8n workflows and automate your business in minutes.
             </p>
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-bold gradient-text">2</div>
-                <div className="text-xs text-muted-foreground">Free Downloads</div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4 mb-8">
+            {[
+              { value: "2", label: "FREE DOWNLOADS" },
+              { value: "∞", label: "CREDIT VALIDITY" },
+              { value: "50+", label: "CATEGORIES" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center p-4 border border-border rounded-lg bg-background">
+                <div className="text-xl font-bold font-mono text-primary">{stat.value}</div>
+                <div className="text-[9px] font-mono tracking-widest text-muted-foreground">{stat.label}</div>
               </div>
-              <div>
-                <div className="text-2xl font-bold gradient-text">∞</div>
-                <div className="text-xs text-muted-foreground">Credit Validity</div>
+            ))}
+          </div>
+
+          {/* Credit Info */}
+          <div className="p-4 border border-border rounded-lg bg-background">
+            <div className="text-xs font-mono tracking-widest text-muted-foreground mb-3">CREDIT COSTS</div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2">
+                  <Zap className="w-3 h-3 text-green-500" />
+                  Simple workflow
+                </span>
+                <span className="font-mono text-green-500">1 credit</span>
               </div>
-              <div>
-                <div className="text-2xl font-bold gradient-text">24/7</div>
-                <div className="text-xs text-muted-foreground">Support</div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2">
+                  <Layers className="w-3 h-3 text-yellow-500" />
+                  Multi-step workflow
+                </span>
+                <span className="font-mono text-yellow-500">3 credits</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2">
+                  <Cpu className="w-3 h-3 text-red-500" />
+                  Advanced + AI workflow
+                </span>
+                <span className="font-mono text-red-500">5 credits</span>
               </div>
             </div>
           </div>
