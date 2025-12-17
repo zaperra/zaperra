@@ -12,8 +12,8 @@ const WorkflowNode = ({ x, y, delay, label }: { x: number; y: number; delay: num
     style={{ left: `${x}%`, top: `${y}%` }}
   >
     <div className="relative">
-      <div className="w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center">
-        <div className="w-6 h-6 rounded bg-primary/20 border border-primary/40" />
+      <div className="w-12 h-12 rounded-2xl bg-card border border-border flex items-center justify-center">
+        <div className="w-6 h-6 rounded-lg bg-primary/20 border border-primary/40" />
       </div>
       <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground font-mono whitespace-nowrap">
         {label}
@@ -50,7 +50,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-background/80 backdrop-blur-sm"
+        className="fixed top-0 left-4 right-4 z-40 border border-border/50 bg-background/80 backdrop-blur-md rounded-b-2xl"
       >
         <div className="container-tight flex items-center justify-between h-10 text-xs font-mono">
           <div className="flex items-center gap-6 text-muted-foreground">
@@ -87,7 +87,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-border bg-card mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card mb-8"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               <span className="text-xs font-mono tracking-wider text-muted-foreground">READY TO AUTOMATE</span>
@@ -237,7 +237,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-0 left-0 right-0 border-t border-border bg-background/80 backdrop-blur-sm"
+        className="absolute bottom-4 left-4 right-4 border border-border/50 bg-background/80 backdrop-blur-md rounded-2xl"
       >
         <div className="container-tight flex items-center justify-between h-12 text-xs font-mono">
           <div className="flex items-center gap-2 text-muted-foreground">

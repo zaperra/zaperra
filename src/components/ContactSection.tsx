@@ -47,7 +47,7 @@ const ContactSection = () => {
             </p>
 
             <div className="space-y-6">
-              <div className="p-4 border border-border bg-card">
+              <div className="p-4 border border-border bg-card rounded-xl">
                 <div className="text-[10px] font-mono tracking-widest text-muted-foreground mb-2">
                   EMAIL
                 </div>
@@ -56,7 +56,7 @@ const ContactSection = () => {
                 </a>
               </div>
 
-              <div className="p-4 border border-border bg-card">
+              <div className="p-4 border border-border bg-card rounded-xl">
                 <div className="text-[10px] font-mono tracking-widest text-muted-foreground mb-2">
                   RESPONSE TIME
                 </div>
@@ -82,7 +82,7 @@ const ContactSection = () => {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Your name"
                   required
-                  className="bg-card border-border rounded-none"
+                  className="bg-card border-border rounded-xl"
                 />
               </div>
 
@@ -97,7 +97,7 @@ const ContactSection = () => {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="you@example.com"
                   required
-                  className="bg-card border-border rounded-none"
+                  className="bg-card border-border rounded-xl"
                 />
               </div>
 
@@ -112,7 +112,7 @@ const ContactSection = () => {
                   placeholder="Tell us how we can help..."
                   rows={5}
                   required
-                  className="bg-card border-border rounded-none resize-none"
+                  className="bg-card border-border rounded-xl resize-none"
                 />
               </div>
 
