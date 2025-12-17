@@ -38,7 +38,7 @@ const PricingSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-12 p-6 border border-primary/30 bg-primary/5 rounded-2xl"
+          className="mb-12 p-5 border border-primary/30 bg-primary/5 rounded-xl"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -66,14 +66,14 @@ const PricingSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              className={`relative p-6 rounded-2xl border transition-all ${
+              className={`relative p-6 rounded-xl border transition-all ${
                 tier.popular
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-card border-border hover:border-primary/30"
               }`}
             >
               {tier.popular && (
-                <span className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary-foreground text-primary text-[10px] font-mono tracking-wider">
+                <span className="absolute top-4 right-4 px-2 py-0.5 rounded-md bg-primary-foreground text-primary text-[10px] font-mono tracking-wider">
                   POPULAR
                 </span>
               )}
@@ -134,7 +134,7 @@ const PricingSection = () => {
               { credits: 3, label: "MEDIUM" },
               { credits: 5, label: "HIGH" },
             ].map((item, index) => (
-              <div key={index} className="bg-card border border-border rounded-2xl p-6 text-center">
+              <div key={index} className="bg-card border border-border rounded-xl p-5 text-center">
                 <span className="text-3xl font-bold font-mono text-primary block mb-1">{item.credits}</span>
                 <span className="text-[10px] font-mono tracking-widest text-muted-foreground">{item.label} COMPLEXITY</span>
               </div>

@@ -59,7 +59,7 @@ const HowItWorksSection = () => {
                 <div className="hidden md:block absolute top-6 left-[calc(50%+3rem)] w-[calc(100%-6rem)] h-px bg-border" />
               )}
               
-              <div className="relative p-6 border border-border bg-card rounded-2xl hover:border-primary/30 transition-colors">
+              <div className="relative p-6 border border-border bg-card rounded-xl hover:border-primary/30 transition-colors">
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-4xl font-bold font-mono text-primary/30">
                     {step.number}
