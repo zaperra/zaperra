@@ -1,154 +1,220 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { PRICING_TIERS } from "@/lib/data";
-import { Check, Sparkles } from "lucide-react";
+import { Check, ArrowRight, Zap, Layers, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Pricing = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="pt-32 pb-16">
+        <div className="container-tight">
           {/* Header */}
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent text-sm font-medium uppercase tracking-wider">Pricing</span>
-            <h1 className="font-display text-3xl sm:text-4xl font-bold mt-4 mb-4">
-              Simple, Transparent Pricing
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mb-16"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-primary" />
+              <span className="text-xs font-mono tracking-widest text-primary">PRICING</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
+              Buy credits once,
+              <br />
+              <span className="text-primary">use them forever</span>
             </h1>
             <p className="text-muted-foreground">
-              Buy credits once, use them forever. No subscriptions, no hidden fees.
+              No subscriptions. No hidden fees. Credits never expire.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Free Tier */}
-          <div className="max-w-2xl mx-auto mb-12">
-            <div className="glass-card rounded-2xl p-6 border-accent/30 border-2">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-purple-600 flex items-center justify-center shrink-0">
-                  <Sparkles className="w-6 h-6 text-white" />
+          {/* How Credits Work - Explained Better */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-16 p-6 border border-border bg-card rounded-xl"
+          >
+            <h2 className="text-sm font-mono tracking-widest text-primary mb-6">HOW IT WORKS</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                  <span className="text-primary font-mono font-bold">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Start Free</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Sign up and get <span className="text-accent font-medium">2 free downloads</span> of low-complexity workflows. No credit card required.
-                  </p>
+                  <h3 className="font-medium mb-1">Buy Credits</h3>
+                  <p className="text-sm text-muted-foreground">One-time purchase. Choose the pack that fits your needs.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                  <span className="text-primary font-mono font-bold">2</span>
+                </div>
+                <div>
+                  <h3 className="font-medium mb-1">Browse & Download</h3>
+                  <p className="text-sm text-muted-foreground">Each workflow costs 1-5 credits based on complexity.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                  <span className="text-primary font-mono font-bold">3</span>
+                </div>
+                <div>
+                  <h3 className="font-medium mb-1">Import to n8n</h3>
+                  <p className="text-sm text-muted-foreground">Get JSON file instantly. Import with one click.</p>
                 </div>
               </div>
             </div>
-          </div>
+
+            {/* Credit Cost Breakdown */}
+            <div className="border-t border-border pt-6">
+              <h3 className="text-xs font-mono tracking-widest text-muted-foreground mb-4">CREDIT COST BY COMPLEXITY</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="flex items-center gap-3 px-4 py-2 bg-secondary rounded-lg">
+                  <Zap className="w-4 h-4 text-green-500" />
+                  <span className="text-sm"><span className="font-mono font-bold text-green-500">1</span> credit = Simple workflow</span>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-2 bg-secondary rounded-lg">
+                  <Layers className="w-4 h-4 text-yellow-500" />
+                  <span className="text-sm"><span className="font-mono font-bold text-yellow-500">3</span> credits = Multi-step workflow</span>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-2 bg-secondary rounded-lg">
+                  <Cpu className="w-4 h-4 text-red-500" />
+                  <span className="text-sm"><span className="font-mono font-bold text-red-500">5</span> credits = Advanced + AI workflow</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Free Tier */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-12 p-5 border border-primary/30 bg-primary/5 rounded-xl"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <div>
+                  <span className="font-medium">Start Free</span>
+                  <span className="text-muted-foreground mx-2">—</span>
+                  <span className="text-sm text-muted-foreground">Get <span className="text-primary font-medium">2 free downloads</span> of simple workflows on signup</span>
+                </div>
+              </div>
+              <Link to="/auth?signup=true">
+                <Button variant="minimal-outline" size="sm">
+                  Create Account
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
 
           {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {PRICING_TIERS.map((tier) => (
-              <div
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+            {PRICING_TIERS.map((tier, index) => (
+              <motion.div
                 key={tier.id}
-                className={`relative rounded-2xl p-6 hover-lift ${
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                className={`relative p-6 rounded-xl border transition-all ${
                   tier.popular
-                    ? 'bg-primary text-primary-foreground'
-                    : 'glass-card'
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-card border-border hover:border-primary/30"
                 }`}
               >
                 {tier.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="px-3 py-1 rounded-full bg-accent text-white text-xs font-medium">
-                      Most Popular
-                    </span>
-                  </div>
+                  <span className="absolute top-4 right-4 px-2 py-0.5 rounded-md bg-primary-foreground text-primary text-[10px] font-mono tracking-wider">
+                    POPULAR
+                  </span>
                 )}
 
-                <div className="mb-6">
-                  <h3 className="font-display font-semibold text-lg mb-2">{tier.name}</h3>
-                  <p className={`text-sm ${tier.popular ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                <div className="mb-5">
+                  <h3 className="font-medium mb-1">{tier.name}</h3>
+                  <p className={`text-xs ${tier.popular ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
                     {tier.description}
                   </p>
                 </div>
 
-                <div className="mb-6">
-                  <span className="font-display text-4xl font-bold">${tier.price}</span>
-                  <span className={`text-sm ${tier.popular ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
-                    {' '}one-time
+                <div className="mb-5">
+                  <span className="text-3xl font-bold font-mono">${tier.price}</span>
+                  <span className={`text-xs ${tier.popular ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
+                    {" "}one-time
                   </span>
                 </div>
 
-                <div className="space-y-3 mb-6">
+                <div className="space-y-2 mb-6">
                   <div className="flex items-center gap-2">
-                    <Check className={`w-4 h-4 ${tier.popular ? 'text-accent' : 'text-accent'}`} />
-                    <span className="text-sm">{tier.credits} credits</span>
+                    <Check className={`w-4 h-4 ${tier.popular ? "text-primary-foreground/60" : "text-primary"}`} />
+                    <span className="text-sm font-medium">{tier.credits} credits</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className={`w-4 h-4 ${tier.popular ? 'text-accent' : 'text-accent'}`} />
+                    <Check className={`w-4 h-4 ${tier.popular ? "text-primary-foreground/60" : "text-primary"}`} />
                     <span className="text-sm">Never expires</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className={`w-4 h-4 ${tier.popular ? 'text-accent' : 'text-accent'}`} />
-                    <span className="text-sm">Instant download</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Check className={`w-4 h-4 ${tier.popular ? 'text-accent' : 'text-accent'}`} />
-                    <span className="text-sm">Email support</span>
                   </div>
                 </div>
 
-                <Link to="/auth?signup=true">
+                <Link to="/auth?signup=true" className="block">
                   <Button
-                    variant={tier.popular ? 'secondary' : 'minimal'}
-                    className="w-full"
+                    variant={tier.popular ? "secondary" : "minimal-outline"}
+                    className={`w-full ${tier.popular ? "text-foreground" : ""}`}
+                    size="sm"
                   >
                     Get Started
+                    <ArrowRight className="w-3 h-3" />
                   </Button>
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* Credit Usage */}
-          <div className="max-w-3xl mx-auto">
-            <h2 className="font-display text-2xl font-bold text-center mb-8">How Credits Work</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass-card rounded-2xl p-6 text-center">
-                <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl font-bold text-green-600">1</span>
-                </div>
-                <h3 className="font-semibold mb-2">Low Complexity</h3>
-                <p className="text-sm text-muted-foreground">Simple workflows with basic integrations</p>
-              </div>
-              <div className="glass-card rounded-2xl p-6 text-center">
-                <div className="w-16 h-16 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl font-bold text-yellow-600">3</span>
-                </div>
-                <h3 className="font-semibold mb-2">Medium Complexity</h3>
-                <p className="text-sm text-muted-foreground">Multi-step workflows with conditions</p>
-              </div>
-              <div className="glass-card rounded-2xl p-6 text-center">
-                <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl font-bold text-red-600">5</span>
-                </div>
-                <h3 className="font-semibold mb-2">High Complexity</h3>
-                <p className="text-sm text-muted-foreground">Advanced workflows with AI & complex logic</p>
-              </div>
-            </div>
-          </div>
-
           {/* FAQ */}
-          <div className="max-w-2xl mx-auto mt-20">
-            <h2 className="font-display text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              <div className="glass-card rounded-xl p-6">
-                <h3 className="font-semibold mb-2">Do credits expire?</h3>
-                <p className="text-sm text-muted-foreground">No! Once you purchase credits, they're yours forever. Use them whenever you need.</p>
-              </div>
-              <div className="glass-card rounded-xl p-6">
-                <h3 className="font-semibold mb-2">Can I get a refund?</h3>
-                <p className="text-sm text-muted-foreground">Credits are non-refundable, but we offer 2 free downloads so you can try before you buy.</p>
-              </div>
-              <div className="glass-card rounded-xl p-6">
-                <h3 className="font-semibold mb-2">How do I download workflows?</h3>
-                <p className="text-sm text-muted-foreground">After purchasing, simply click download on any workflow. You'll receive a JSON file to import into n8n.</p>
-              </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="max-w-2xl"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-px bg-primary" />
+              <span className="text-xs font-mono tracking-widest text-primary">FAQ</span>
             </div>
-          </div>
+            
+            <div className="space-y-4">
+              {[
+                {
+                  q: "Do credits expire?",
+                  a: "No. Once purchased, credits are yours forever. Use them whenever you need."
+                },
+                {
+                  q: "Can I get a refund?",
+                  a: "Credits are non-refundable. We offer 2 free downloads so you can try before buying."
+                },
+                {
+                  q: "How do I download workflows?",
+                  a: "Click download on any workflow, then import the JSON file directly into n8n."
+                },
+                {
+                  q: "What payment methods do you accept?",
+                  a: "We accept all major credit cards and PayPal through our secure payment system."
+                }
+              ].map((item, index) => (
+                <div key={index} className="p-5 border border-border bg-card rounded-xl">
+                  <h3 className="font-medium mb-2">{item.q}</h3>
+                  <p className="text-sm text-muted-foreground">{item.a}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </main>
       <Footer />

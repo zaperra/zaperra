@@ -70,9 +70,9 @@ const FeaturesSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-card border border-border rounded-2xl p-8 group hover:border-primary/30 transition-all"
+                className="bg-card border border-border rounded-xl p-8 group hover:border-primary/30 transition-all"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-all">
+                <div className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-all">
                   <Icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-base font-medium mb-2 tracking-tight">

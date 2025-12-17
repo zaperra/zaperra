@@ -12,7 +12,7 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="fixed top-4 left-4 right-4 z-50 border border-border/50 bg-background/90 backdrop-blur-md rounded-2xl shadow-lg shadow-black/5"
+      className="fixed top-4 left-4 right-4 z-50 border border-border/50 bg-background/90 backdrop-blur-md rounded-xl shadow-lg shadow-black/5"
     >
       <div className="px-6">
         <div className="flex items-center justify-between h-16">
@@ -29,8 +29,8 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
-            <div className="flex items-center border border-border rounded-xl px-1 py-1 bg-card">
-              <Link to="/" className="px-4 py-1.5 text-xs font-medium rounded-xl bg-secondary text-foreground">
+            <div className="flex items-center border border-border rounded-lg px-1 py-1 bg-card">
+              <Link to="/" className="px-4 py-1.5 text-xs font-medium rounded-md bg-secondary text-foreground">
                 <span className="text-muted-foreground mr-1 font-mono">HOM</span> Home
               </Link>
               <Link to="/marketplace" className="px-4 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
