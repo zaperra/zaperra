@@ -1,15 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
 import Logo from "@/components/Logo";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { resolvedTheme, setTheme } = useTheme();
 
-  const isActive = (path: string) => location.pathname === path;
+  const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
+  const isActive = (path: string) => normalizedPath === path;
 
   const navLinkClasses = (path: string) =>
     isActive(path)
@@ -18,6 +21,8 @@ const Navbar = () => {
 
   const navLinkPrefixClasses = (path: string) =>
     isActive(path) ? "text-muted-foreground mr-1 font-mono" : "text-muted-foreground/50 mr-1 font-mono";
+
+  const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
 
   return (
     <motion.nav
@@ -34,7 +39,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
             <div className="flex items-center border border-border rounded-lg px-1 py-1 bg-card">
-              <Link to="/" className={navLinkClasses("/")}>
+              <Link to="/" className={navLinkClasses("/")}> 
                 <span className={navLinkPrefixClasses("/")}>HOM</span> Home
               </Link>
               <Link to="/marketplace" className={navLinkClasses("/marketplace")}>
@@ -46,8 +51,18 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Auth Buttons */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Right side */}
+          <div className="hidden md:flex items-center gap-2">
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              className="h-9 w-9"
+            >
+              {resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </Button>
             <Link to="/auth">
               <Button variant="ghost" size="sm" className="text-xs font-mono">
                 Log in
@@ -61,10 +76,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
@@ -79,6 +91,16 @@ const Navbar = () => {
               className="md:hidden py-6 border-t border-border overflow-hidden"
             >
               <div className="flex flex-col gap-4">
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="flex items-center justify-between text-muted-foreground hover:text-foreground transition-colors text-sm font-mono"
+                  aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                >
+                  <span>Theme</span>
+                  {resolvedTheme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
+
                 <Link to="/marketplace" className="text-muted-foreground hover:text-foreground transition-colors text-sm font-mono">
                   Marketplace
                 </Link>
