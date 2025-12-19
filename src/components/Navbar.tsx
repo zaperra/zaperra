@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -7,6 +7,17 @@ import Logo from "@/components/Logo";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
+
+  const navLinkClasses = (path: string) =>
+    isActive(path)
+      ? "px-4 py-1.5 text-xs font-medium rounded-md bg-secondary text-foreground"
+      : "px-4 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors";
+
+  const navLinkPrefixClasses = (path: string) =>
+    isActive(path) ? "text-muted-foreground mr-1 font-mono" : "text-muted-foreground/50 mr-1 font-mono";
 
   return (
     <motion.nav
@@ -23,14 +34,14 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
             <div className="flex items-center border border-border rounded-lg px-1 py-1 bg-card">
-              <Link to="/" className="px-4 py-1.5 text-xs font-medium rounded-md bg-secondary text-foreground">
-                <span className="text-muted-foreground mr-1 font-mono">HOM</span> Home
+              <Link to="/" className={navLinkClasses("/")}>
+                <span className={navLinkPrefixClasses("/")}>HOM</span> Home
               </Link>
-              <Link to="/marketplace" className="px-4 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
-                <span className="text-muted-foreground/50 mr-1 font-mono">MKT</span> Marketplace
+              <Link to="/marketplace" className={navLinkClasses("/marketplace")}>
+                <span className={navLinkPrefixClasses("/marketplace")}>MKT</span> Marketplace
               </Link>
-              <Link to="/pricing" className="px-4 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
-                <span className="text-muted-foreground/50 mr-1 font-mono">PRC</span> Pricing
+              <Link to="/pricing" className={navLinkClasses("/pricing")}>
+                <span className={navLinkPrefixClasses("/pricing")}>PRC</span> Pricing
               </Link>
             </div>
           </div>
