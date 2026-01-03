@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import Logo from "@/components/Logo";
 import { 
   Zap, 
@@ -80,7 +81,9 @@ const Waitlist = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !email.includes("@")) {
+    const trimmedEmail = email.trim().toLowerCase();
+    
+    if (!trimmedEmail || !trimmedEmail.includes("@")) {
       toast({
         title: "Invalid email",
         description: "Please enter a valid email address.",
@@ -91,17 +94,42 @@ const Waitlist = () => {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setEmail("");
-    
-    toast({
-      title: "You're on the list!",
-      description: "We'll notify you when Zaperra launches. Check your email for confirmation."
-    });
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert({ email: trimmedEmail });
+      
+      if (error) {
+        if (error.code === '23505') {
+          toast({
+            title: "Already registered",
+            description: "This email is already on the waitlist!",
+            variant: "destructive"
+          });
+        } else {
+          throw error;
+        }
+        setIsSubmitting(false);
+        return;
+      }
+      
+      setIsSubmitted(true);
+      setEmail("");
+      
+      toast({
+        title: "You're on the list!",
+        description: "We'll notify you when Zaperra launches. Check your email for confirmation."
+      });
+    } catch (error) {
+      console.error('Waitlist signup error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
