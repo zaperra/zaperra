@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -16,7 +15,9 @@ import {
   Sparkles,
   Clock,
   Users,
-  Star
+  Star,
+  Shield,
+  Mail
 } from "lucide-react";
 
 const benefits = [
@@ -64,10 +65,10 @@ const howItWorks = [
 ];
 
 const stats = [
-  { value: "500+", label: "Workflows at Launch" },
-  { value: "3", label: "Complexity Levels" },
-  { value: "$2", label: "Starting Price" },
-  { value: "2", label: "Free Downloads" }
+  { value: "500+", label: "WORKFLOWS" },
+  { value: "3", label: "COMPLEXITY" },
+  { value: "$2", label: "STARTING" },
+  { value: "2", label: "FREE DL" }
 ];
 
 const Waitlist = () => {
@@ -105,110 +106,242 @@ const Waitlist = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/">
-            <Logo />
-          </Link>
-          <Link to="/">
-            <Button variant="outline" className="rounded-xl">
-              Back to Home
-            </Button>
-          </Link>
+      {/* Top Status Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="fixed top-0 left-4 right-4 z-50 border border-border/50 bg-background/80 backdrop-blur-md rounded-b-xl"
+      >
+        <div className="container-tight flex items-center justify-between h-10 text-xs font-mono">
+          <div className="flex items-center gap-6 text-muted-foreground">
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              BUILDING
+            </span>
+            <span className="hidden sm:flex items-center gap-2">
+              <span className="text-primary">⬡</span>
+              WAITLIST OPEN
+            </span>
+            <span className="hidden md:flex items-center gap-2">
+              <span className="text-primary">◈</span>
+              EARLY ACCESS
+            </span>
+          </div>
+          <div className="text-muted-foreground">
+            {new Date().toLocaleDateString('en-US', { 
+              month: 'short', 
+              day: '2-digit', 
+              year: 'numeric' 
+            }).toUpperCase()}
+          </div>
         </div>
-      </header>
+      </motion.div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="container mx-auto max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8">
-              <Clock className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Launching Soon</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Join the{" "}
-              <span className="font-serif italic text-primary">Waitlist</span>
-              <br />
-              for Automation Revolution
-            </h1>
-            
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
-              Be among the first to access the premier marketplace for n8n workflows. 
-              Buy, sell, and discover automation templates that save hours of work.
-            </p>
-          </motion.div>
+      <section className="min-h-screen relative overflow-hidden flex items-center">
+        <div className="container-tight pt-24 pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <div className="relative z-10">
+              {/* Logo */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mb-8"
+              >
+                <Logo />
+              </motion.div>
 
-          {/* Email Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-md mx-auto"
-          >
-            {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-12 rounded-xl bg-card border-border/50 text-base"
-                  disabled={isSubmitting}
-                />
-                <Button 
-                  type="submit" 
-                  className="h-12 px-8 rounded-xl"
-                  disabled={isSubmitting}
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 mb-8"
+              >
+                <Clock className="w-3.5 h-3.5 text-primary" />
+                <span className="text-xs font-mono tracking-wider text-primary">LAUNCHING SOON</span>
+              </motion.div>
+
+              {/* Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 tracking-tight"
+              >
+                Join the
+                <br />
+                <span className="text-primary">Waitlist</span>
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="flex items-center gap-3 text-xs font-mono tracking-widest text-muted-foreground mb-6"
+              >
+                <span className="w-4 h-px bg-primary" />
+                AUTOMATION REVOLUTION AWAITS
+              </motion.p>
+
+              {/* Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
+              >
+                Be among the first to access the premier marketplace for n8n workflows. 
+                Buy, sell, and discover automation templates that save hours of work.
+              </motion.p>
+
+              {/* Email Form */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="max-w-md"
+              >
+                {!isSubmitted ? (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="relative">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="h-14 pl-12 pr-4 rounded-xl bg-card border-border/50 text-base font-mono placeholder:font-sans"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <Button 
+                      type="submit" 
+                      className="w-full h-14 rounded-xl text-base font-medium group"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center gap-3">
+                          <span className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                          Joining Waitlist...
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-3">
+                          Join the Waitlist
+                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      )}
+                    </Button>
+                  </form>
+                ) : (
+                  <div className="flex items-center gap-4 p-5 rounded-xl bg-primary/10 border border-primary/20">
+                    <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-foreground">You're on the waitlist!</p>
+                      <p className="text-sm text-muted-foreground">Check your email for confirmation.</p>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="flex items-center gap-4 mt-6 text-xs font-mono text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-primary" />
+                    <span>1,200+ WAITING</span>
+                  </div>
+                  <span className="w-1 h-1 rounded-full bg-border" />
+                  <div className="flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span>NO SPAM</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Side - Stats & Benefits Preview */}
+            <div className="relative hidden lg:block">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="relative corner-brackets p-8"
+              >
+                {/* Stats Grid */}
+                <div className="grid grid-cols-2 gap-6 mb-8">
+                  {stats.map((stat, index) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8 + index * 0.1 }}
+                      className="p-6 rounded-xl bg-card border border-border/50 text-center"
+                    >
+                      <div className="text-3xl font-bold text-primary font-mono mb-1">
+                        {stat.value}
+                      </div>
+                      <div className="text-[10px] font-mono tracking-widest text-muted-foreground">
+                        {stat.label}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Workflow Preview Panel */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
+                  className="p-6 rounded-xl bg-card border border-border/50"
                 >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Joining...
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Join Waitlist
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  )}
-                </Button>
-              </form>
-            ) : (
-              <div className="flex items-center justify-center gap-3 p-4 rounded-xl bg-primary/10 border border-primary/20">
-                <CheckCircle2 className="w-6 h-6 text-primary" />
-                <span className="text-primary font-medium">You're on the waitlist! Check your email.</span>
-              </div>
-            )}
-            
-            <p className="text-sm text-muted-foreground mt-4">
-              <Users className="w-4 h-4 inline mr-1" />
-              Join 1,200+ automation enthusiasts already on the list
-            </p>
-          </motion.div>
+                  <div className="text-[10px] font-mono tracking-widest text-muted-foreground mb-4">
+                    COMING SOON
+                  </div>
+                  {[
+                    { label: "WORKFLOWS", value: "500+", status: "ready" },
+                    { label: "CATEGORIES", value: "25+", status: "ready" },
+                    { label: "CREATORS", value: "50+", status: "pending" },
+                    { label: "PLATFORM", value: "BUILDING", status: "active" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center justify-between py-3 border-b border-border last:border-0">
+                      <span className="text-[10px] font-mono text-muted-foreground">{item.label}</span>
+                      <span className={`text-xs font-mono ${
+                        item.status === 'ready' ? 'text-green-500' :
+                        item.status === 'active' ? 'text-primary' :
+                        'text-muted-foreground'
+                      }`}>
+                        {item.value}
+                      </span>
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 px-6 bg-card/50 border-y border-border/50">
-        <div className="container mx-auto max-w-5xl">
+      <section className="py-24 px-6 border-t border-border/50">
+        <div className="container-tight">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Waitlist <span className="font-serif italic text-primary">Perks</span>
+            <span className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-primary mb-4">
+              <span className="w-4 h-px bg-primary" />
+              EXCLUSIVE PERKS
+              <span className="w-4 h-px bg-primary" />
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+              Early Supporter <span className="text-primary">Benefits</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Early supporters get exclusive benefits that won't be available after launch
+              Join now and unlock exclusive perks that won't be available after launch
             </p>
           </motion.div>
 
@@ -220,13 +353,13 @@ const Waitlist = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-background border border-border/50 hover:border-primary/30 transition-colors group"
+                className="group corner-brackets p-6 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <benefit.icon className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <benefit.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                <h3 className="text-base font-semibold mb-2 tracking-tight">{benefit.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -234,19 +367,24 @@ const Waitlist = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto max-w-5xl">
+      <section className="py-24 px-6 bg-card/30 border-t border-border/50">
+        <div className="container-tight">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              How <span className="font-serif italic text-primary">Zaperra</span> Works
+            <span className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-primary mb-4">
+              <span className="w-4 h-px bg-primary" />
+              HOW IT WORKS
+              <span className="w-4 h-px bg-primary" />
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+              Simple <span className="text-primary">Three-Step</span> Process
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              A simple three-step process to supercharge your automation workflow
+              Get started with automation in minutes, not hours
             </p>
           </motion.div>
 
@@ -260,39 +398,16 @@ const Waitlist = () => {
                 transition={{ delay: index * 0.15 }}
                 className="relative"
               >
-                <div className="corner-brackets p-8 rounded-2xl bg-card/50 border border-border/50 h-full">
-                  <span className="text-6xl font-bold text-primary/20 absolute top-4 right-6">
+                <div className="corner-brackets p-8 rounded-xl bg-background border border-border/50 h-full">
+                  <span className="absolute top-4 right-6 text-6xl font-bold text-primary/10 font-mono">
                     {item.step}
                   </span>
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-                    <item.icon className="w-7 h-7 text-primary" />
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
+                    <item.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.description}</p>
+                  <h3 className="text-lg font-semibold mb-3 tracking-tight">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 px-6 bg-primary/5 border-y border-primary/10">
-        <div className="container mx-auto max-w-4xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -300,58 +415,89 @@ const Waitlist = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto max-w-2xl text-center">
+      <section className="py-24 px-6 border-t border-border/50">
+        <div className="container-tight">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="max-w-2xl mx-auto text-center"
           >
-            <Zap className="w-12 h-12 text-primary mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Automate Smarter?
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-8">
+              <Zap className="w-8 h-8 text-primary" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+              Ready to Automate <span className="text-primary">Smarter</span>?
             </h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-muted-foreground mb-10 max-w-lg mx-auto">
               Don't miss out on early access perks. Join the waitlist today and be part of the automation revolution.
             </p>
             
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <Input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-12 rounded-xl bg-card border-border/50"
-                  disabled={isSubmitting}
-                />
+              <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-14 pl-12 pr-4 rounded-xl bg-card border-border/50 font-mono"
+                    disabled={isSubmitting}
+                  />
+                </div>
                 <Button 
                   type="submit" 
-                  className="h-12 px-8 rounded-xl"
+                  className="w-full h-14 rounded-xl text-base font-medium group"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Joining..." : "Join Now"}
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-3">
+                      <span className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                      Joining...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-3">
+                      Secure Your Spot
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  )}
                 </Button>
               </form>
             ) : (
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary/10 border border-primary/20">
+              <div className="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-primary/10 border border-primary/20">
                 <CheckCircle2 className="w-5 h-5 text-primary" />
-                <span className="text-primary font-medium">You're already on the list!</span>
+                <span className="font-medium">You're already on the list!</span>
               </div>
             )}
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-border/50">
-        <div className="container mx-auto max-w-4xl flex flex-col md:flex-row items-center justify-between gap-4">
-          <Logo />
-          <p className="text-sm text-muted-foreground">
-            © 2025 Zaperra. All rights reserved.
-          </p>
+      {/* Bottom Status Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1 }}
+        className="fixed bottom-4 left-4 right-4 border border-border/50 bg-background/80 backdrop-blur-md rounded-xl z-50"
+      >
+        <div className="container-tight flex items-center justify-between h-12 text-xs font-mono">
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <span className="text-primary">◎</span>
+            PLATFORM: ZAPERRA
+          </div>
+          <div className="hidden sm:block text-muted-foreground">
+            STATUS: BUILDING
+          </div>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            WAITLIST ACTIVE
+          </div>
         </div>
-      </footer>
+      </motion.div>
+
+      {/* Footer spacing for bottom bar */}
+      <div className="h-20" />
     </div>
   );
 };
