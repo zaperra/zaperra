@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #000; }
+        .primary { fill: #3b82f6; }
+      }
+      @media (prefers-color-scheme: light) {
+        .bg { fill: #fff; }
+        .primary { fill: #2563eb; }
+      }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="64" height="64" class="bg"/>
+  
+  <!-- Outer border rounded -->
+  <rect x="8" y="8" width="48" height="48" rx="4" ry="4" class="primary" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Inner rotated square (45 degrees) -->
+  <g transform="translate(32, 32)">
+    <rect x="-12" y="-12" width="24" height="24" transform="rotate(45)" class="primary" fill="currentColor" opacity="0.8"/>
+  </g>
+  
+  <!-- Corner accents -->
+  <line x1="10" y1="10" x2="16" y2="10" class="primary" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+  <line x1="10" y1="10" x2="10" y2="16" class="primary" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+  
+  <line x1="54" y1="54" x2="48" y2="54" class="primary" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+  <line x1="54" y1="54" x2="54" y2="48" class="primary" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+</svg>
