@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { sendConfirmationEmail } from "@/lib/emailjs";
 import Logo from "@/components/Logo";
 import { 
   Zap, 
@@ -112,6 +113,9 @@ const Waitlist = () => {
         setIsSubmitting(false);
         return;
       }
+      
+      // Send confirmation email (non-blocking)
+      sendConfirmationEmail({ to_email: trimmedEmail });
       
       setIsSubmitted(true);
       setEmail("");
