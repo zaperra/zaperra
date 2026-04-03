@@ -20,7 +20,10 @@ import { supabase } from "@/integrations/supabase/client";
   Download,
   Eye,
   Edit,
-  Trash2
+  Trash2,
+  Mail,
+  Copy,
+  RefreshCw
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
