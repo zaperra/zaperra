@@ -579,9 +579,61 @@ const SettingsSection = () => {
   );
 };
 
+const ADMIN_PASSWORD = 'zaperra2024';
+
+const AdminLogin = ({ onAuth }: { onAuth: () => void }) => {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      sessionStorage.setItem('admin_auth', 'true');
+      onAuth();
+    } else {
+      setError('Invalid password');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-4">
+            <span className="text-primary-foreground font-serif italic text-2xl">Z</span>
+          </div>
+          <h1 className="text-xl font-serif italic text-foreground">Admin Access</h1>
+          <p className="text-sm text-muted-foreground mt-1">Enter password to continue</p>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); setError(''); }}
+            className="bg-card border-border"
+          />
+          {error && <p className="text-sm text-destructive">{error}</p>}
+          <Button type="submit" className="w-full">Access Admin</Button>
+        </form>
+        <div className="text-center mt-4">
+          <Link to="/waitlist" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            ← Back to site
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Admin = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<AdminSection>('dashboard');
+  const [isAuthed, setIsAuthed] = useState(() => sessionStorage.getItem('admin_auth') === 'true');
+
+  if (!isAuthed) {
+    return <AdminLogin onAuth={() => setIsAuthed(true)} />;
+  }
 
   const getSectionTitle = () => {
     const titles: Record<AdminSection, string> = {
