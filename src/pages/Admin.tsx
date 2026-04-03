@@ -584,6 +584,143 @@ const SettingsSection = () => {
   );
 };
 
+// Waitlist Section
+const WaitlistSection = () => {
+  const [emails, setEmails] = useState<{ id: string; email: string; created_at: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const fetchEmails = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('waitlist')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      toast.error('Failed to load waitlist');
+    } else {
+      setEmails(data || []);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchEmails();
+  }, []);
+
+  const filtered = emails.filter(e => 
+    e.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const copyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    toast.success('Email copied!');
+  };
+
+  const copyAllEmails = () => {
+    const allEmails = filtered.map(e => e.email).join(', ');
+    navigator.clipboard.writeText(allEmails);
+    toast.success(`${filtered.length} emails copied!`);
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Stats row */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <StatCard title="Total Signups" value={emails.length.toLocaleString()} change="" isPositive={true} icon={Mail} />
+        <StatCard 
+          title="Today" 
+          value={emails.filter(e => new Date(e.created_at).toDateString() === new Date().toDateString()).length.toLocaleString()} 
+          change="" isPositive={true} icon={TrendingUp} 
+        />
+        <StatCard 
+          title="This Week" 
+          value={emails.filter(e => {
+            const d = new Date(e.created_at);
+            const now = new Date();
+            const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            return d >= weekAgo;
+          }).length.toLocaleString()} 
+          change="" isPositive={true} icon={Users} 
+        />
+      </div>
+
+      {/* Table */}
+      <div className="bg-card border border-border rounded-2xl overflow-hidden">
+        <div className="p-6 border-b border-border">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <h2 className="font-serif italic text-lg text-foreground">Waitlist Emails</h2>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="relative flex-1 sm:flex-initial">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input 
+                  placeholder="Search emails..." 
+                  className="pl-9 w-full sm:w-64 bg-muted/50" 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <Button variant="outline" size="icon" onClick={fetchEmails} title="Refresh">
+                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              </Button>
+              <Button variant="outline" size="sm" onClick={copyAllEmails}>
+                <Copy className="w-4 h-4 mr-2" /> Copy All
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="p-12 text-center text-muted-foreground">Loading...</div>
+        ) : filtered.length === 0 ? (
+          <div className="p-12 text-center text-muted-foreground">
+            {searchQuery ? 'No emails match your search' : 'No waitlist signups yet'}
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-muted/50">
+                <tr>
+                  <th className="text-left p-4 text-xs font-medium text-muted-foreground uppercase tracking-wide">#</th>
+                  <th className="text-left p-4 text-xs font-medium text-muted-foreground uppercase tracking-wide">Email</th>
+                  <th className="text-left p-4 text-xs font-medium text-muted-foreground uppercase tracking-wide">Signed Up</th>
+                  <th className="text-right p-4 text-xs font-medium text-muted-foreground uppercase tracking-wide">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((entry, index) => (
+                  <tr key={entry.id} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
+                    <td className="p-4 text-muted-foreground text-sm font-mono">{index + 1}</td>
+                    <td className="p-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                          <Mail className="w-4 h-4 text-primary" />
+                        </div>
+                        <span className="font-medium text-sm text-foreground">{entry.email}</span>
+                      </div>
+                    </td>
+                    <td className="p-4 text-sm text-muted-foreground">
+                      {new Date(entry.created_at).toLocaleDateString('en-US', { 
+                        month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' 
+                      })}
+                    </td>
+                    <td className="p-4 text-right">
+                      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => copyEmail(entry.email)} title="Copy email">
+                        <Copy className="w-4 h-4" />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const ADMIN_PASSWORD = 'zaperra2024';
 
 const AdminLogin = ({ onAuth }: { onAuth: () => void }) => {
