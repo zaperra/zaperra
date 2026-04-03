@@ -54,6 +54,7 @@ const AdminSidebar = ({
 }) => {
   const menuItems: { icon: React.ElementType; label: string; section: AdminSection }[] = [
     { icon: LayoutDashboard, label: 'Dashboard', section: 'dashboard' },
+    { icon: Mail, label: 'Waitlist', section: 'waitlist' },
     { icon: Zap, label: 'Workflows', section: 'workflows' },
     { icon: Users, label: 'Users', section: 'users' },
     { icon: CreditCard, label: 'Transactions', section: 'transactions' },
