@@ -780,6 +780,7 @@ const Admin = () => {
   const getSectionTitle = () => {
     const titles: Record<AdminSection, string> = {
       dashboard: 'Dashboard',
+      waitlist: 'Waitlist',
       workflows: 'Workflows',
       users: 'Users',
       transactions: 'Transactions',
@@ -792,6 +793,8 @@ const Admin = () => {
     switch (activeSection) {
       case 'dashboard':
         return <DashboardSection />;
+      case 'waitlist':
+        return <WaitlistSection />;
       case 'workflows':
         return <WorkflowsSection />;
       case 'users':
