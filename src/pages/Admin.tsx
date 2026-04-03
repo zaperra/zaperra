@@ -667,6 +667,19 @@ const WaitlistSection = () => {
               <Button variant="outline" size="sm" onClick={copyAllEmails}>
                 <Copy className="w-4 h-4 mr-2" /> Copy All
               </Button>
+              <Button variant="outline" size="sm" onClick={() => {
+                const csv = ['Email,Signed Up', ...filtered.map(e => `${e.email},${new Date(e.created_at).toISOString()}`)].join('\n');
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `waitlist-${new Date().toISOString().split('T')[0]}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+                toast.success(`Exported ${filtered.length} emails`);
+              }}>
+                <Download className="w-4 h-4 mr-2" /> Export CSV
+              </Button>
             </div>
           </div>
         </div>
