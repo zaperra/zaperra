@@ -35,7 +35,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
-type AdminSection = 'dashboard' | 'workflows' | 'users' | 'transactions' | 'settings';
+type AdminSection = 'dashboard' | 'waitlist' | 'workflows' | 'users' | 'transactions' | 'settings';
 
 const AdminSidebar = ({ 
   isOpen, 
